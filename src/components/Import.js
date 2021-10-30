@@ -51,7 +51,7 @@ import React, {
       this.state = {
         id:'',
         account:'',
-        quantity:null,
+        quantity:'',
         exportinglicense:'',
         tocountry:'',
         fromcountry:'',
@@ -283,7 +283,7 @@ import React, {
       async approveImport()
       {
         await this.setState({loading:true});
-        await this.state.coaltracker.methods.verify(this.state.id.toString(),this.state.importinglicense.toString()).send({from:this.state.account}).then((result)=>{
+        await this.state.coaltracker.methods.verify(this.state.id.toString(),this.state.importinglicense.toString()).send({from:this.state.account, gas: 100000}).then((result)=>{
           console.log("Done");
           this.setState({loading:false});
           alert("Import goods successfully approved for market sale");
@@ -486,7 +486,7 @@ import React, {
        <
       Button 
   
-      loading ={this.state.loading}
+      
   
       disabled = {
         this.state.approvebutton==false

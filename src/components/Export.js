@@ -52,7 +52,7 @@ import React, {
       this.state = {
         id:'',
         account:'',
-        quantity:null,
+        quantity:'',
         exportinglicense:'',
         tocountry:'',
         fromcountry:'',
@@ -146,7 +146,7 @@ import React, {
       await this.setState({loading:true});
       var id = this.state.id.toString();
       var ipfshash = this.state.ipfshash.toString();
-      await this.state.coaltracker.methods.exporter(id,ipfshash).send({from:this.state.account}).then((result)=>{
+      await this.state.coaltracker.methods.exporter(id,ipfshash).send({from:this.state.account, gas: 1000000}).then((result)=>{
         console.log("Done");
         this.setState({loading:false});
         alert("The coal has been successfully exported.");
@@ -490,7 +490,7 @@ import React, {
        <
       Button positive 
 
-      loading = {this.state.loading}
+      
       disabled = {
         this.state.ipfsuploaddone==false
       }
