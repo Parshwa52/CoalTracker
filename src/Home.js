@@ -1,11 +1,20 @@
-
 import React, { Component } from 'react';
-import Home from './Home';
+import Navigation from './components/navigation';
+import Header from './components/header.js';
+import Features from './components/features';
+import About from './components/about';
+
+//import Services from './components/services';
+//import Gallery from './components/gallery';
+import Testimonials from './components/testimonials';
+//import Team from './components/Team';
+import Contact from './components/contact';
 import JsonData from './data/data.json';
+//import Identicon from 'identicon.js';
 import Web3 from 'web3';
-import { BrowserRouter as Router ,Switch,Route} from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import './App.css';
-class App extends Component {
+class Home extends Component {
 
   constructor(props) {
     super(props)
@@ -69,7 +78,8 @@ class App extends Component {
     console.log(accounts);
    // 
    const networkId=await web3.eth.net.getId();
-    
+   
+   
     
     
   }
@@ -78,16 +88,20 @@ class App extends Component {
   render() {
     return (
      
-      
-        <Router>
-          <div className="App">
-        <Switch>
-        <Route path="/" exact component={Home}></Route>
+      <div>
         
-        </Switch>
-        </div>
-        </Router>
-     
+        
+        <Navigation />
+        <Header data={this.state.landingPageData.Header} />
+        
+        <Features data={this.state.landingPageData.Features} />
+        
+        <About data={this.state.landingPageData.About} />
+        <Testimonials data={this.state.landingPageData.Testimonials} />
+        
+        <Contact data={this.state.landingPageData.Contact} />
+        
+      </div>
      
       
         
@@ -95,4 +109,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Home;
