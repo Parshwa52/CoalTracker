@@ -2178,10 +2178,55 @@
       "links": {},
       "address": "0xf3c701C23124daaE30E937040Bb6961b71Cc930e",
       "transactionHash": "0xb3dbcd9d704086f5d6c9d44704f1bcafd510bc7a4f15d549b4fb669201045fd3"
+    },
+    "80001": {
+      "events": {
+        "0xc768a074988cd0bc58663537456a3e7ff47ca3cf78224884a709aa7145b2f7bc": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "id",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "ipfshash",
+              "type": "string"
+            }
+          ],
+          "name": "exported",
+          "type": "event"
+        },
+        "0x5dfb642d22110dc3994b6cb5e4a7b3c9b35c0139be0d67878cca17efd525fa2b": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "id",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "importinglicense",
+              "type": "string"
+            }
+          ],
+          "name": "verified",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x31a628704fEC26C4071E8b51845C65a7Ff20B918",
+      "transactionHash": "0x728ccad1354595a0017914af5c9d40d54cd30bb8c561a305ae17e373c2247a9c"
     }
   },
   "schemaVersion": "3.3.2",
-  "updatedAt": "2021-10-30T10:26:01.978Z",
+  "updatedAt": "2021-10-30T16:39:32.155Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}

@@ -22,8 +22,13 @@
 // const infuraKey = "fj4jll3k.....";
 //
 // const fs = require('fs');
-// const mnemonic = fs.readFileSync(".secret").toString().trim();
-
+const HDWalletProvider = require('@truffle/hdwallet-provider');
+const fs = require('fs');
+//mnemonic is your metamask or any wallet 12 word passphrase
+const mnemonic = fs.readFileSync(".secret").toString().trim();
+//project id your project made on https://rpc.maticvigil.com/
+const projectid = fs.readFileSync(".projectid").toString().trim();
+//mnemonic and projectid are fetched from separate file and added in gitignore because it can't be shared.
 module.exports = {
   /**
    * Networks define how you connect to your ethereum client and let you set the
@@ -46,7 +51,16 @@ module.exports = {
       host: "127.0.0.1",     // Localhost (default: none)
       port: 7545,            // Standard Ethereum port (default: none)
       network_id: "*",       // Any network (default: none)
-     }
+     },
+     matic: {
+      provider: () => new HDWalletProvider(mnemonic, `https://rpc-mumbai.maticvigil.com/v1/${projectid}`),
+      network_id: 80001,
+      confirmations: 2,
+      timeoutBlocks: 200,
+      skipDryRun: true
+    }
+  
+
     // Another network with more advanced options...
     // advanced: {
     // port: 8777,             // Custom port
@@ -84,7 +98,7 @@ module.exports = {
   // Configure your compilers
   compilers: {
     solc: {
-      //version: "0.8.9",    // Fetch exact version from solc-bin (default: truffle's version)
+      // version: "0.5.1",    // Fetch exact version from solc-bin (default: truffle's version)
       // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
        settings: {          // See the solidity docs for advice about optimization and evmVersion
         optimizer: {

@@ -130,6 +130,7 @@ import React, {
       if(networkdata)
       {
         const coaltracker=new web3.eth.Contract(CoalTracker.abi,networkdata.address);
+        console.log(coaltracker);
         this.setState({coaltracker});
       }
       
@@ -292,6 +293,7 @@ import React, {
             {
               console.log("ipfs hash",result);
               this.setState({ipfshash:result[0].hash});
+              alert("Your QR Code has been successfully published on IPFS Decentralised Storage.");
             }
           });
           this.setState({ipfsuploaddone:true});
