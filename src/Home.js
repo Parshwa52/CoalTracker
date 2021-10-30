@@ -1,3 +1,4 @@
+import CoalTracker from './abis/CoalTracker.json';
 import React, { Component } from 'react';
 import Navigation from './components/navigation';
 import Header from './components/header.js';
@@ -78,8 +79,12 @@ class Home extends Component {
     console.log(accounts);
    // 
    const networkId=await web3.eth.net.getId();
-   
-   
+   const networkdata=CoalTracker.networks[networkId];
+   if(networkdata)
+   {
+     const coaltracker=new web3.eth.Contract(CoalTracker.abi,networkdata.address);
+     
+   }
     
     
   }

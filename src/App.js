@@ -1,5 +1,6 @@
-
+import CoalTracker from './abis/CoalTracker.json';
 import React, { Component } from 'react';
+import Export from './components/Export';
 import Home from './Home';
 import JsonData from './data/data.json';
 import Web3 from 'web3';
@@ -69,7 +70,12 @@ class App extends Component {
     console.log(accounts);
    // 
    const networkId=await web3.eth.net.getId();
-    
+    const networkdata=CoalTracker.networks[networkId];
+    if(networkdata)
+    {
+      const coaltracker=new web3.eth.Contract(CoalTracker.abi,networkdata.address);
+      
+    }
     
     
   }
@@ -83,6 +89,8 @@ class App extends Component {
           <div className="App">
         <Switch>
         <Route path="/" exact component={Home}></Route>
+        
+        <Route path="/Export" component={Export}></Route>
         
         </Switch>
         </div>
