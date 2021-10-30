@@ -2,6 +2,8 @@
 
 ## 🥇The Blockchain based platform to track coal smuggling. 💰
 
+![landing page](./public/coaltrackerytthumbnail.JPG)
+
 ### Survey
 
 Recently, we may have heard or seen the news of Global Coal Crisis in the World.
@@ -30,6 +32,7 @@ CoalTracker has used Polygon Blockchain and Interplanetary File Storage to imple
 
 5) Hence, Only verified coal will be traded in market.
 
+
 ### Steps to Run
 
 1) Clone this repository
@@ -39,3 +42,8 @@ CoalTracker has used Polygon Blockchain and Interplanetary File Storage to imple
 3) Setup Metamask and truffle config according to your testnet.
 
 4) Run 'npm start' in main folder and check landing page at http://localhost:3000
+
+### Video Demo
+
+[![CoalTracker](https://img.youtube.com/vi/SmTFB5xQe3Q/0.jpg)](https://www.youtube.com/watch?v=SmTFB5xQe3Q)
+
