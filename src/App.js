@@ -1,5 +1,6 @@
 import CoalTracker from './abis/CoalTracker.json';
 import React, { Component } from 'react';
+import Import from './components/Import';
 import Export from './components/Export';
 import Home from './Home';
 import JsonData from './data/data.json';
@@ -89,7 +90,7 @@ class App extends Component {
           <div className="App">
         <Switch>
         <Route path="/" exact component={Home}></Route>
-        
+        <Route path="/Import" component={Import}></Route>
         <Route path="/Export" component={Export}></Route>
         
         </Switch>
