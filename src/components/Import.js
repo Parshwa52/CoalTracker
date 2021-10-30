@@ -77,7 +77,8 @@ import React, {
       this.onFind = this.onFind.bind(this);
       this.handleChange = this.handleChange.bind(this);
       this.verifybothQRcodes = this.verifybothQRcodes.bind(this);
-      
+      this.verifyImport = this.verifyImport.bind(this);
+      this.approveImport = this.approveImport.bind(this);
     }
   
      
@@ -213,7 +214,83 @@ import React, {
       }
     }
   
+      async verifyImport()
+      {
+            console.log("details=",this.state.details);
+            var str= this.state.details.toString();
+            var arr=str.split(",");
+            var currprodid = arr[0];
+            var currquantity = arr[1];
+            var currfromc = arr[2];
+            var currtoc = arr[3];
+            var currexpl = arr[4];
+            var curramt = arr[5];
+  
+            if(this.state.id === currprodid)
+            {
+              if(this.state.quantity === currquantity)
+              {
+                  if(this.state.fromcountry === currfromc)
+                  {
+                    if(this.state.tocountry === currtoc)
+                    {
+                      if(this.state.exportinglicense === currexpl)
+                      {
+                          if(this.state.billamt === curramt)
+                          {
+                            alert("The details have been perfectly verified. You can approve the import.");
+                            this.setState({approvebutton:true});
+                          }
+                          else
+                          {
+                            alert("The bill amount is not matching. Check for illegal smuggling.");
+                            this.billamt.focus();
+                          }
+                      }
+                      else
+                      {
+                        alert("The Exporting license is not matching. Check for fake exporters.");
+                        this.exportinglicense.focus();
+                      }
+                    }
+                    else
+                    {
+                      alert("The desination country is not matching. Please try again.");
+                      
+                    }
+  
+                  }
+                  else
+                  {
+                    alert("The source country is not matching. Please try again.");
+                    
+                  }
+              }
+              else
+              {
+                alert("The quantity received is not matching with the sent quantity. Check for smuggling.");
+                this.quantity.focus();
+              }
+  
+            }
+            else
+            {
+              alert("The production lot id is not matching. Get the correct production lot.");
+              this.id.focus();
+            }
+      }
+  
+      async approveImport()
+      {
+        await this.setState({loading:true});
+        await this.state.coaltracker.methods.verify(this.state.id.toString(),this.state.importinglicense.toString()).send({from:this.state.account}).then((result)=>{
+          console.log("Done");
+          this.setState({loading:false});
+          alert("Import goods successfully approved for market sale");
+        });
       
+      }
+        
     render() {
    
       return ( 
