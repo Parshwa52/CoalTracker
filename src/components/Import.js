@@ -127,8 +127,8 @@ import React, {
         this.setState({account:accounts[0]});
       }.bind(this));
   
-      console.log(web3);
-      console.log(accounts);
+      //console.log(web3);
+      //console.log(accounts);
      // 
      const networkId=await web3.eth.net.getId();
     const networkdata=CoalTracker.networks[networkId];
@@ -169,7 +169,7 @@ import React, {
     //console.log("out=",out);
   
     const code = jsQR(out.data, out.width, out.height);
-    console.log("Found QR code", code.data);
+    //console.log("Found QR code", code.data);
     this.setState({bothQRdone:true});
     this.setState({encdetails:code.data.toString()});
     
@@ -216,7 +216,7 @@ import React, {
   
       async verifyImport()
       {
-            console.log("details=",this.state.details);
+            //console.log("details=",this.state.details);
             var str= this.state.details.toString();
             var arr=str.split(",");
             var currprodid = arr[0];

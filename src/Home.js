@@ -75,8 +75,8 @@ class Home extends Component {
       this.setState({account:accounts[0]});
     }.bind(this));
 
-    console.log(web3);
-    console.log(accounts);
+    //console.log(web3);
+    //console.log(accounts);
    // 
    const networkId=await web3.eth.net.getId();
    const networkdata=CoalTracker.networks[networkId];

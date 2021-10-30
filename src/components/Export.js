@@ -123,14 +123,14 @@ import React, {
         this.setState({account:accounts[0]});
       }.bind(this));
   
-      console.log(web3);
-      console.log(accounts);
+      //console.log(web3);
+      //console.log(accounts);
      const networkId=await web3.eth.net.getId();
       const networkdata=CoalTracker.networks[networkId];
       if(networkdata)
       {
         const coaltracker=new web3.eth.Contract(CoalTracker.abi,networkdata.address);
-        console.log(coaltracker);
+        //console.log(coaltracker);
         this.setState({coaltracker});
       }
       
@@ -205,7 +205,7 @@ import React, {
         
         var alldets = (this.state.id + "," + this.state.quantity + "," + this.state.fromcountry + "," + this.state.tocountry + "," + this.state.exportinglicense + "," + this.state.billamt).toString();
         var details = CryptoJS.AES.encrypt(alldets,this.state.id.toString()+"rekcartloac").toString();
-        console.log("ciphertext=",details);
+        //console.log("ciphertext=",details);
         
         await this.setState({details});
         
@@ -217,24 +217,12 @@ import React, {
 
       
         const canvas = await document.getElementById("qrc");
-        console.log("canvas=",canvas)
+        //console.log("canvas=",canvas)
         const pngUrl = await canvas.toDataURL()/*.replace("image/png", "image/octet-stream")*/;
-        console.log("pngurl=",pngUrl);
+        //console.log("pngurl=",pngUrl);
         //let downloadLink = await document.createElement("a");
         
-        //downloadLink.href = pngUrl;
-        //pngUrl = pngUrl.replace("")
-        //downloadLink.download = "qrc.png";
-        //document.body.appendChild(downloadLink);
-        //console.log("download link",downloadLink)
-        /*let uploadobj = {
-            imglink:pngUrl,
-        };*/
-    
-        //let objectString = await JSON.stringify(uploadobj);
-        //console.log("objstring=",objectString);
-        //var base64 = pngUrl.split('base64,')[1];
-        //var parseFile = new Parse.File("abcd.png", { base64: base64 });
+        
         
 
         var byteString = atob(pngUrl.split(',')[1]);
@@ -270,7 +258,7 @@ import React, {
              reader.onloadend=()=>{
                //console.log("reader",reader.result);
                this.setState({buffer:Buffer(reader.result)});
-               console.log("buffer",this.state.buffer);
+               //console.log("buffer",this.state.buffer);
                
              }
              this.setState({qrgendone:true});
@@ -291,7 +279,7 @@ import React, {
             }
             else
             {
-              console.log("ipfs hash",result);
+              //console.log("ipfs hash",result);
               this.setState({ipfshash:result[0].hash});
               alert("Your QR Code has been successfully published on IPFS Decentralised Storage.");
             }
