@@ -1,70 +1,41 @@
-# Getting Started with Create React App
+# 🔥🎫  CoalTracker  📃🔥
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 🥇The Blockchain based platform to track coal smuggling. 💰
 
-## Available Scripts
+### Survey
 
-In the project directory, you can run:
+Recently, we may have heard or seen the news of Global Coal Crisis in the World.
 
-### `npm start`
+https://www.cnbc.com/2021/10/12/coal-shortage-india-could-soon-be-on-the-brink-of-a-power-crisis.html
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Problem
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Coal is the most beneficial mineral in this world. It is used in electricity generation.  And during, this crisis, there is a huge demand for coal, and supply is very reduced. So, the obvious thing is many fraudsters will try to do corruption, black marketing, and maybe smuggling of coal which is a big loss to the nation and econom. There is no proper platform for tracking coal import, export, and its verification at ports. There are various supply chain issues and we do not have exact track record of coal.
 
-### `npm test`
+https://www.republicworld.com/tags/coal-smuggling-case
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Solution
 
-### `npm run build`
+CoalTracker has used Polygon Blockchain and Interplanetary File Storage to implement the solution. The advantages of my solution are fast QR code based verification, no legal tender to smuggled coal, catching smugglers and complete coal import/export tracking.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Methodology
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1) First, the exporter tries to export the coal by giving the details like production lot ID, quantity, source and destination country, exporting license and bill amount and generating a QR Code on these details.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2) This QR Code will printed on each production lot and will also be stored on IPFS Storage to prevent tampering in between routes.
 
-### `npm run eject`
+3) Now, when the coal reaches importer, it will verify the printed QR code received with QR on IPFS Storage via camera. This is first step of verification. Now, it will enter details of coal received. These details will be compared with exporter' s details. If they are same then, importer approves coal for trade in country otherwise that coal will not be legal tender i.e no value so no point of trading unverified coal.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+4) Now, consumer companies can get the authenticity of coal just by its production ID.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+5) Hence, Only verified coal will be traded in market.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Steps to Run
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+1) Clone this repository
 
-## Learn More
+2) Run 'npm install ' in main folder to install node modules.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+3) Setup Metamask and truffle config according to your testnet.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+4) Run 'npm start' in main folder and check landing page at http://localhost:3000
