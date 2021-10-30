@@ -41,7 +41,9 @@ import React, {
   //import {
     //DateInput
   //} from 'semantic-ui-calendar-react';
-  
+  const ipfsClient = require('ipfs-http-client');
+  const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: 5001, protocol: 'http' }); // leaving out the arguments will default to these values
+  const buffer = ipfs.Buffer;
   
   export default class Export extends Component {
     constructor(props) {
@@ -67,9 +69,9 @@ import React, {
         coaltracker:null,
         loading:false
       };
-      
+      this.generateQRCode = this.generateQRCode.bind(this);
       //this.blobtoimage = this.blobtoimage.bind(this);
-      
+      this.ipfsupload = this.ipfsupload.bind(this);
       
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
@@ -183,7 +185,117 @@ import React, {
 
 
     
+    generateQRCode = async(event)=> {
+
+      event.preventDefault();
+      //console.log(this.state.id + this.state.tocountry + this.state.fromcountry + this.state.exportinglicense+this.state.quantity+this.state.billamt+this.state.checkbox);
+      if (!this.state.quantity.match(/^(0|[1-9][0-9]*)$/)) {
+        alert("Quantity should be numeric");
+        this.quantity.focus()
+      }
+      else if (!this.state.billamt.match(/^(0|[1-9][0-9]*)$/)) {
+        alert("Amount should be numeric");
+        this.billamt.focus()
+      }
+      else
+      {
+      try {
+
+        
+        var alldets = (this.state.id + "," + this.state.quantity + "," + this.state.fromcountry + "," + this.state.tocountry + "," + this.state.exportinglicense + "," + this.state.billamt).toString();
+        var details = CryptoJS.AES.encrypt(alldets,this.state.id.toString()+"rekcartloac").toString();
+        console.log("ciphertext=",details);
+        
+        await this.setState({details});
+        
+
+      } catch (err) {
+        console.log(err);
+        
+      }
+
+      
+        const canvas = await document.getElementById("qrc");
+        console.log("canvas=",canvas)
+        const pngUrl = await canvas.toDataURL()/*.replace("image/png", "image/octet-stream")*/;
+        console.log("pngurl=",pngUrl);
+        //let downloadLink = await document.createElement("a");
+        
+        //downloadLink.href = pngUrl;
+        //pngUrl = pngUrl.replace("")
+        //downloadLink.download = "qrc.png";
+        //document.body.appendChild(downloadLink);
+        //console.log("download link",downloadLink)
+        /*let uploadobj = {
+            imglink:pngUrl,
+        };*/
     
+        //let objectString = await JSON.stringify(uploadobj);
+        //console.log("objstring=",objectString);
+        //var base64 = pngUrl.split('base64,')[1];
+        //var parseFile = new Parse.File("abcd.png", { base64: base64 });
+        
+
+        var byteString = atob(pngUrl.split(',')[1]);
+
+        // separate out the mime component
+        var mimeString = pngUrl.split(',')[0].split(':')[1].split(';')[0]
+
+        // write the bytes of the string to an ArrayBuffer
+        var ab = new ArrayBuffer(byteString.length);
+
+        // create a view into the buffer
+        var ia = new Uint8Array(ab);
+
+        // set the bytes of the buffer to the correct values
+        for (var i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+        }
+
+        // write the ArrayBuffer to a blob, and you're done
+        var blob = await new Blob([ab], {type: mimeString});
+        console.log("blob=",blob);
+        await this.setState({blob:blob});
+        //const imageUrl = URL.createObjectURL(blob); 
+        //const myImage = document.getElementById('123');
+        //myImage.src = URL.createObjectURL(blob);
+        const myFile = await new File([this.state.blob], "image.png", {
+          type: this.state.blob.type,
+        });
+      
+        const reader=await new window.FileReader();
+            reader.readAsArrayBuffer(myFile);
+            // var blob = window.dataURLtoBlob(pngUrl);
+             reader.onloadend=()=>{
+               //console.log("reader",reader.result);
+               this.setState({buffer:Buffer(reader.result)});
+               console.log("buffer",this.state.buffer);
+               
+             }
+             this.setState({qrgendone:true});
+
+      }
+        
+
+      };
+
+      async ipfsupload()
+      {
+        //let bufferedString = await Buffer.from(imageUrl.toString());
+        await ipfs.add(this.state.buffer,(error,result)=>{
+            if(error)
+            {
+                console.log(error);
+                alert("Error in uploading");
+            }
+            else
+            {
+              console.log("ipfs hash",result);
+              this.setState({ipfshash:result[0].hash});
+            }
+          });
+          this.setState({ipfsuploaddone:true});
+      }
     
       
     
