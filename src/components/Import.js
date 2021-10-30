@@ -76,6 +76,8 @@ import React, {
       
       this.onFind = this.onFind.bind(this);
       this.handleChange = this.handleChange.bind(this);
+      this.verifybothQRcodes = this.verifybothQRcodes.bind(this);
+      
     }
   
      
@@ -147,7 +149,48 @@ import React, {
       //alert("Your QR Code is scanned successfully. Verify it now.")
      }
   
-     
+     verifybothQRcodes=async(event)=>
+     {
+      event.preventDefault();
+  
+     var ipfshash = await this.state.coaltracker.methods.importer(this.state.id.toString()).call({from: this.state.account});
+     var ipfslink = "https://ipfs.io/ipfs/" + ipfshash.toString();
+      await fetch( ipfslink )
+  .then( r => r.arrayBuffer() )
+  .then( buffer => { // note this is already an ArrayBuffer
+    // there is no buffer.data here
+    const data = png.decode(buffer);
+      const out = {
+        data: new Uint8ClampedArray(png.toRGBA8(data)[0]),
+        height: data.height,
+        width: data.width,
+      };
+    //console.log("out=",out);
+  
+    const code = jsQR(out.data, out.width, out.height);
+    console.log("Found QR code", code.data);
+    this.setState({bothQRdone:true});
+    this.setState({encdetails:code.data.toString()});
+    
+  } );
+  
+  //console.log("value=",this.state.value);
+  //console.log("encdetails=",this.state.encdetails);
+      if(this.state.encdetails.toString()===this.state.value.toString())
+      {
+        alert("Your QR code verification is completed successfully. Now, enter the details.");
+        //decrypt
+        var bytes  = CryptoJS.AES.decrypt(this.state.encdetails.toString(), this.state.id.toString()+"rekcartloac");
+        var originalText = bytes.toString(CryptoJS.enc.Utf8);
+        this.setState({details:originalText.toString()});
+        this.setState({otherdetopen:true});
+        //this.state.quantity.focus();
+      }
+      else
+      {
+        alert("Your QR code has been tampered or damaged! Please try again.");
+      }
+    };
       
   
     selectCountry =(val)=> {
@@ -169,8 +212,6 @@ import React, {
         });
       }
     }
-  
-      
   
       
     render() {
