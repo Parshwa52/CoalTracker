@@ -87,7 +87,7 @@ class App extends Component {
     return (
      
       
-        <Router>
+        <Router basename="/">
           <div className="App">
         <Switch>
         <Route path="/" exact component={Home}></Route>
