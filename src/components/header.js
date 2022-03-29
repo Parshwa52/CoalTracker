@@ -20,18 +20,28 @@ export class Header extends Component {
                   </p>
                   <form>
                     
-                  <button
-                    onClick={() => window.open('/Import')}
+                  <Link to={{
+                            pathname: '/Import',
+                            
+                          }} >
+                  <input type="button" value="Upload New Video"
+                    
                     className="btn btn-custom btn-lg page-scroll"
-                  >
-                    Import
-                  </button>{" "}
-                  <button
-                    onClick={() => window.open('/Export')}
+                  />
+                    
+                  {" "}
+                          </Link>
+                          <Link to={{
+                            pathname: '/Export',
+                            
+                          }} >
+                  <input type="button" value="Upload New Video"
+                    
                     className="btn btn-custom btn-lg page-scroll"
-                  >
-                    Export
-                  </button>{" "}
+                  />
+                    
+                  {" "}
+                          </Link>
                   
                   
                   </form>

@@ -6,7 +6,7 @@ import ConsumerCompany  from './components/ConsumerCompany';
 import Home from './Home';
 import JsonData from './data/data.json';
 import Web3 from 'web3';
-import { HashRouter as Router ,Switch,Route} from 'react-router-dom';
+import { HashRouter  ,Switch,Route} from 'react-router-dom';
 import './App.css';
 class App extends Component {
 
@@ -87,16 +87,16 @@ class App extends Component {
     return (
      
       
-        <Router basename="/">
+        <HashRouter basename="/">
           <div className="App">
-        <Switch>
+        
         <Route path="/" exact component={Home}></Route>
         <Route path="/Import" component={Import}></Route>
         <Route path="/Export" component={Export}></Route>
         <Route path="/ConsumerCompany" component={ConsumerCompany}></Route>
-        </Switch>
+        
         </div>
-        </Router>
+        </HashRouter>
      
      
       
