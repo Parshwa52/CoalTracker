@@ -13,7 +13,7 @@ import Contact from './components/contact';
 import JsonData from './data/data.json';
 //import Identicon from 'identicon.js';
 import Web3 from 'web3';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { HashRouter as Router } from 'react-router-dom';
 import './App.css';
 class Home extends Component {
 
