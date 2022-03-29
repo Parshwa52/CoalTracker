@@ -5,12 +5,19 @@ export class testimonials extends Component {
     return (
       <div id="testimonials">
         <h1>Want to verify your coal?</h1>
-        <button
-                    onClick={() => window.open('/ConsumerCompany')}
-                    className="btn btn-warning btn-lg page-scroll"
-                  >
-                    Click here to verify
-                  </button>{" "}
+        
+        <Link to={{
+                            pathname: '/ConsumerCompany',
+                            
+                          }} >
+                  <input type="button" value="Click here to verify"
+                    
+                    className="btn btn-custom btn-lg page-scroll"
+                  />
+                    
+                  {" "}
+                          </Link>
+
                   <br/><br/><br/>
       </div>
     );

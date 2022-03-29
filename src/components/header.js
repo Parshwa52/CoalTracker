@@ -24,7 +24,7 @@ export class Header extends Component {
                             pathname: '/Import',
                             
                           }} >
-                  <input type="button" value="Upload New Video"
+                  <input type="button" value="Import"
                     
                     className="btn btn-custom btn-lg page-scroll"
                   />
@@ -35,7 +35,7 @@ export class Header extends Component {
                             pathname: '/Export',
                             
                           }} >
-                  <input type="button" value="Upload New Video"
+                  <input type="button" value="Export"
                     
                     className="btn btn-custom btn-lg page-scroll"
                   />

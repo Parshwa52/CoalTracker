@@ -41,6 +41,11 @@ import React, {
   //import {
     //DateInput
   //} from 'semantic-ui-calendar-react';
+  import { Web3Storage, getFilesFromPath } from 'web3.storage';
+  
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweGQyRDY2MWE1RDkzN0YxMTNkMTFDMThiNTZDRjU3ZTM1MjlBMThiMkUiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2Mzg4MTU0MTQ2ODUsIm5hbWUiOiJUcmFja0l0In0.40UzWkXeEFreTxL0TesLk3alHsE6k4BmUU9i7capmKk";
+  const client = new Web3Storage({ token })
+
   const ipfsClient = require('ipfs-http-client');
   const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: 5001, protocol: 'http' }); // leaving out the arguments will default to these values
   const buffer = ipfs.Buffer;
@@ -63,7 +68,9 @@ import React, {
         details:'',
         buffer:'',
         blob:'',
-        value: '', watching: false, 
+        value: '',
+        qrfile:null,
+        watching: false, 
         qrgendone:false,
         ipfsuploaddone:false,
         coaltracker:null,
@@ -72,7 +79,7 @@ import React, {
       this.generateQRCode = this.generateQRCode.bind(this);
       //this.blobtoimage = this.blobtoimage.bind(this);
       this.ipfsupload = this.ipfsupload.bind(this);
-      
+      this.filecoinupload = this.filecoinupload.bind(this);
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
       
@@ -186,9 +193,9 @@ import React, {
 
 
     
-    generateQRCode = async(event)=> {
+    async generateQRCode()  {
 
-      event.preventDefault();
+      //event.preventDefault();
       //console.log(this.state.id + this.state.tocountry + this.state.fromcountry + this.state.exportinglicense+this.state.quantity+this.state.billamt+this.state.checkbox);
       if (!this.state.quantity.match(/^(0|[1-9][0-9]*)$/)) {
         alert("Quantity should be numeric");
@@ -251,7 +258,11 @@ import React, {
         const myFile = await new File([this.state.blob], "image.png", {
           type: this.state.blob.type,
         });
-      
+        const files = await getFilesFromPath('image.png')
+        const cid = await client.put(files);
+        console.log(cid);
+        await this.setState({qrfile:myFile});
+        console.log("qrfile sent=",this.state.qrfile);
         const reader=await new window.FileReader();
             reader.readAsArrayBuffer(myFile);
             // var blob = window.dataURLtoBlob(pngUrl);
@@ -267,6 +278,13 @@ import React, {
         
 
       };
+
+      async filecoinupload()
+      {
+        console.log("qrfile received=",this.state.qrfile);
+
+        
+      }
 
       async ipfsupload()
       {
@@ -468,9 +486,9 @@ import React, {
         this.state.qrgendone ==false || this.state.ipfsuploaddone == true
       }
       primary onClick = {
-        this.ipfsupload
+        this.filecoinupload
       }
-       > Publish to IPFS </Button>
+       > Publish to Filecoin </Button>
 
        <br/>
        <br/>
